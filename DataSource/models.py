@@ -1,15 +1,47 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
+
+## Custom Import 
+from VR3DCognitive.models import TimestampedModel
+
+
+User = get_user_model()
 # Create your models here.
 
-class   VRModel(models.Model):
+class VRModel(TimestampedModel):
 
-    sessionID = models.CharField(max_length=150)    
+    sessionID    = models.CharField(max_length=150)    
     frame_number = models.CharField(max_length=20)    
-    timestamp = models.CharField(max_length=150)    
-    sensor_data = models.TextField(max_length=500) 
+    timestamp    = models.CharField(max_length=150)    
+    sensor_data  = models.TextField(max_length=500) 
 
-#   "sessionID": "2024-10-01T12-34-32",
+    class Meta:
+        db_table ='vr3d_info'
+        ordering = ['-created_at']
+
+
+
+class VRUser(TimestampedModel):
+    vr_user_id = models.AutoField(primary_key=True)
+    user_id    = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    contact_no = models.CharField(max_length=13, null=True, blank=True)    
+    country_id = models.SmallIntegerField(default=1)
+    state_id   = models.SmallIntegerField(default=1)
+    city       = models.CharField(max_length=100, null=True, blank=True)
+    address    = models.TextField(max_length=300, null=True, blank=True)
+    address2   = models.TextField(max_length=300, null=True, blank=True)
+    zip        = models.CharField(max_length=10,  null=True, blank=True)
+
+    def __str__(self):
+        return f"Name: {self.user_id.first_name}, ContactNo: {self.contact_no}"
+
+    class Meta:
+        db_table = 'vrusers'
+        ordering = ['-created_at']
+
+ #   "sessionID": "2024-10-01T12-34-32",
 #   "frameNumber": 25,
 #   "timestamp": "2024-10-01T12-34-34.0749",
 #   "sensorData": {
@@ -91,31 +123,3 @@ class   VRModel(models.Model):
 #     "EyeLeftRot": "(0.00000, 0.00000, 0.00000, 1.00000)",
 #     "EyeRightRot": "(0.00000, 0.00000, 0.00000, 1.00000)"
 #   }
-
-      
-
-    class Meta:
-        db_table ='vr3d_info'
-
-
-
-class VRUser(models.Model):
-    class Meta:
-        db_table = 'vrusers'
-    user_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    contact_no = models.CharField(max_length=13)    
-    email = models.CharField(max_length=60,default=None,unique=True)
-    password = models.CharField(max_length=60,default=True)
-    country_id = models.SmallIntegerField(default=1)
-    state_id = models.SmallIntegerField(default=1)
-    city = models.CharField(max_length=100,default="")
-    address = models.TextField(max_length=300,default=None)
-    address2 = models.TextField(max_length=300,default="")
-    zip = models.CharField(max_length=10,default="")
-    def __str__(self):
-        return self.first_name
-
-
- 

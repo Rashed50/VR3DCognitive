@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'bootstrap5',
     'DataSource',
+    'VR3DCognitive',
 
 ]
 
@@ -84,12 +85,12 @@ WSGI_APPLICATION = 'VR3DCognitive.wsgi.application'
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg',
-        "ENGINE": "django.db.backends.postgresql",
-        'NAME': 'vr3dcognitive1',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST':'127.0.0.1',
-        'PORT': '5432'
+        "ENGINE"   : "django.db.backends.postgresql",
+        'NAME'     : 'vr3dcognitive1',
+        'USER'     : 'postgres',
+        'PASSWORD' : '123456',
+        'HOST'     :'localhost',
+        'PORT'     : '5432'
     }
 }
 

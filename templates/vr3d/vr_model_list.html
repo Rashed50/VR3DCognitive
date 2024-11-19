@@ -1,0 +1,76 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock title %}
+
+
+{% block styles %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock styles %}
+
+
+
+{% block content %}
+<div class="card row m-5">
+    <h1 class="text-center">VR Model Data</h1>
+
+    <div class="d-flex justify-content-center align-items-center" style="flex-direction: column;">
+        <!-- Table to display VRModel data -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Session ID</th>
+                    <th>Frame Number</th>
+                    <th>Timestamp</th>
+                    <th>Sensor Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model in vr_models %}
+                <tr>
+                    <td>{{ model.sessionID }}</td>
+                    <td>{{ model.frame_number }}</td>
+                    <td>{{ model.timestamp }}</td>
+                    <td>{{ model.sensor_data }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Optional: Pagination controls -->
+        <div>
+            {% if vr_models.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ vr_models.previous_page_number }}">Previous</a>
+            {% endif %}
+        
+            <span>Page {{ vr_models.number }} of {{ vr_models.paginator.num_pages }}</span>
+        
+            {% if vr_models.has_next %}
+            <a href="?page={{ vr_models.next_page_number }}">Next</a>
+            <a href="?page={{ vr_models.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+{% block js %}{% endblock js %}
