@@ -40,7 +40,8 @@
                 <li class="active">
                     <a href="{% url 'index' %}">Home</a>
                 </li>
-                <li class="active"><a href="send-message">Test Message</a></li>
+                
+
                 <li><a href="#">About</a></li>
                 <li><a href="contact.html">Contact Us</a></li>                
                 <li>
@@ -53,6 +54,19 @@
                             Login
                         </a>
                     {% endif %}
+                </li>
+
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Developer API
+                        </button>
+                        <div class="dropdown-menu btn-secondary" aria-labelledby="dropdownMenuButton">
+                            <a href="send-message"><span style="padding: 10px;">Test Message</span> <hr></a> <br>
+                            <a href="api/get-vr-data"><span style="padding: 10px;">Receive Data</span> <hr> </a>  <br>
+                            <a href="api/store-vr-data"><span style="padding: 10px;">Store Data</span> <hr> </a>  <br>
+                        </div>
+                      </div>
                 </li>
             </ul>
         </div>

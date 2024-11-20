@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('',views.Home.as_view(),name='index'),
     path('send-message',views.sendMessage,name="send_message"),
-    path('api/',views.sendMessage,name="send_message"),
+   # path('api/',views.sendMessage,name="send_message"),
 
 
 
