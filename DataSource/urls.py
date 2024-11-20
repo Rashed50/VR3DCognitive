@@ -9,6 +9,7 @@ urlpatterns = [
     # path('login/',views.login,name='login_form'),
     path('send-message',views.sendMessage,name="send_message"),
     path('api/',views.sendMessage,name="send_message"),
+    path('api/store',views.sendMessage,name="send_message"),
 
     path('vr-list/', views.VRModelListView.as_view(), name='vr_model_list'),
 
