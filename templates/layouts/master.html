@@ -51,7 +51,7 @@
     <!--============= (Header Section Start) ==================-->
 
     <!-- header top section start -->
-    <div class="header_top_section">
+        <!-- <div class="header_top_section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -63,46 +63,21 @@
                         <div class="call_text_1"><a href="#"><span class="padding_right0"><i class="fa fa-map-marker"
                                         aria-hidden="true"></i></span> Location</a></div>
                     </div>
+                    
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- header top section end -->
 
     <!-- header section start -->
     <div class="header_section">
-
-        {% include 'layouts/partial/header.html' %}
-
-        {% if banner_show %}
-        <!-- banner section start -->
-        <div class="banner_section layout_padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="banner_taital"> {{ info.name }} We care Of You</h1>
-                        <p class="banner_text">Build Better
-                            VR/AR Training
-                            with 3D Analytics</p>
-                        <div class="read_bt"><a href="#">Read More</a></div>
-        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- banner section end -->
-        {% endif %}
+        {% include 'layouts/partial/header.html' %}        
     </div>
     <!-- header section end -->
     <!--============= (Header Section End) ====================-->
 
-
-
-    <!--=============== (Body Section End) ====================-->
-    <!--=======================================================-->
-    {% block content %}
-
-
+    {% if banner_show %}
     <!-- banner section start -->
     <div class="banner_section layout_padding">
         <div class="container">
@@ -119,10 +94,16 @@
         </div>
     </div>
     <!-- banner section end -->
+    {% endif %}
+
+    <!--=============== (Body Section End) ====================-->
+    <!--=======================================================-->
+    {% block content %}
     
-    
-    
-    <!-- appointment section start -->
+    <div class="container">
+        <div class="row"> <br><br></div>
+    </div>
+<!--     
     <div class="appointment_section">
         <div class="container">
             <div class="appointment_box">
@@ -197,9 +178,8 @@
             </div>
         </div>
     </div>
-    <!-- appointment section end -->
     
- 
+  -->
     
     
     <!-- doctores section start -->

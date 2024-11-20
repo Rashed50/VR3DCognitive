@@ -37,7 +37,7 @@ class Home(generic.TemplateView):
         
         context['banner_show'] = True
         context['info'] = {
-            'name': 'Your Company Name'
+            'name': ''
         }
         return context
 
@@ -65,7 +65,7 @@ class SignupView(View):
         last_name  = request.POST.get('l_name')
         email      = request.POST.get('email')
         phone      = request.POST.get('phone')
-        country    = request.POST.get('country')
+        country    = 1 # request.POST.get('country')
         city       = request.POST.get('city')
         address    = request.POST.get('address')
         password   = request.POST.get('password')
