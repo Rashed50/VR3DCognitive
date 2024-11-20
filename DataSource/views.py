@@ -9,9 +9,12 @@ from .models import VRUser,VRModel
 from VR3DCognitive.mqtt import client as mqtt_client
 from django.views import View, generic
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+
+
 
 User = get_user_model()
 
@@ -68,13 +71,6 @@ def createNewMember(request):
 
 # def login(request):
 #     return render(request, 'auth/login.html')
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.views import View
-
-
 
 class LoginView(View):
     template_name = "auth/login.html"

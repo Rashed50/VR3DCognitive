@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>VR3D | Login</title>
+    <title>VR3D | Signup</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -20,37 +20,39 @@
 
     <meta name="csrf-token" content="{{ csrf_token }}">
     <style>
-        body, html {
-            height: 100%; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .ps-1{
+        .ps-1 {
             padding: 10px;
         }
+
         .form-control:focus {
-            border-color: #33b4e7e9; 
-            box-shadow: 0 0 5px rgba(65, 198, 246, 0.786); 
+            border-color: #33b4e7e9;
+            box-shadow: 0 0 5px rgba(65, 198, 246, 0.786);
         }
 
         .card {
-            width: 100%; 
-            min-width: 500px;
-            max-width: 800px; 
+            width: 100%;
+            min-width: 600px;
+            max-width: 800px;
         }
 
         @media (max-width: 768px) {
             .card {
-                width: 80%; 
+                width: 80%;
             }
         }
 
         @media (max-width: 480px) {
             .card {
-                width: 90%; 
+                width: 90%;
             }
         }
     </style>
@@ -62,10 +64,10 @@
 <body>
     <div class="card" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
         <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Login Form</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Signup Form</h3>
             <form method="post">
                 {% csrf_token %}
-    
+
                 <!-- Show messages if any -->
                 {% if messages %}
                 <div>
@@ -76,20 +78,21 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-    
+
                 <div class="mb-3">
                     <label class="form-label">Email address</label>
                     <input type="email" class="form-control ps-1" placeholder="Write your email..." name="email">
                     <!-- if email incorrect then show here -->
                 </div>
-    
+
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control ps-1" placeholder="Write your password..." name="password">
+                    <input type="password" class="form-control ps-1" placeholder="Write your password..."
+                        name="password">
                     <!-- if password is incorrect then show here -->
                 </div>
-    
-    
+
+
                 <!-- 2 column grid layout for inline styling -->
                 <div class="row mb-4">
                     <div class="col d-flex justify-content-center">
@@ -99,25 +102,26 @@
                             <label class="form-check-label" for="form2Example31"> Remember me </label>
                         </div>
                     </div>
-    
+
                     <div class="col">
                         <!-- Simple link -->
                         <a href="#!">Forgot password?</a>
                     </div>
                 </div>
-    
+
                 <!-- Submit button -->
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign
+                <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                    class="btn btn-primary btn-block mb-4">Sign
                     in</button>
-    
+
                 <!-- Register buttons -->
                 <div class="text-center">
                     <p>Not a member? <a href="signup">Register</a></p>
-    
+
                 </div>
             </form>
         </div>
     </div>
 </body>
-    
+
 </html>
