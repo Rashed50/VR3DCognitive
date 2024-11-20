@@ -1,4 +1,5 @@
 <!-- footer section start -->
+{% load static %}
 <div class="footer_section">
     <div class="container">
         <div class="input_bt">
@@ -17,11 +18,11 @@
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
-                                    <span class="padding_15">Call : +01 1234567890</span></a>
+                                    <span class="padding_15">Call : +49 1234567890</span></a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
-                                    <span class="padding_15">Email : demo@gmail.com</span></a>
+                                    <span class="padding_15">Email : vrdemo@gmail.com</span></a>
                             </li>
                         </ul>
                     </div>
@@ -47,7 +48,7 @@
                     <div class="footer_menu">
                         <ul>
                             <li class="active">
-                                <a href="index.html">Home</a>
+                                <a href="{% url 'index' %}">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">About</a>
@@ -64,15 +65,19 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <h3 class="footer_taital">Help & Support</h3>
-                    <p class="ipsum_text">Opposed to using 'Content here, content here', making it look like
+                    <p class="ipsum_text">Opposed to using,  making it look like
                         readable English. Many desktop publishing packages and web page</p>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <h3 class="footer_taital">News</h3>
-                    <div class="dryfood_text"><img src="images/img-4.png"><span class="padding_15">Normal
+                    <div class="dryfood_text">
+                        <!-- <img src="{% static 'images/img-4.png' %}"> -->
+                        <span class="padding_15">Normal
                             distribution</span></div>
-                    <div class="dryfood_text"><img src="images/img-5.png"><span class="padding_15">Normal
-                            distribution</span></div>
+                    <div class="dryfood_text">
+                        <!-- <img src="images/img-5.png">-->
+                         <span class="padding_15"> 
+                            Paid  distribution</span></div>
                 </div>
             </div>
         </div>
