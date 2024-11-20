@@ -40,7 +40,7 @@
 
         .card {
             width: 100%;
-            min-width: 600px;
+            min-width: 700px;
             max-width: 800px;
         }
 
@@ -79,17 +79,43 @@
                 </div>
                 {% endif %}
 
-                <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control ps-1" placeholder="Write your email..." name="email">
-                    <!-- if email incorrect then show here -->
-                </div>
+                <div class="row">
 
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control ps-1" placeholder="Write your password..."
-                        name="password">
-                    <!-- if password is incorrect then show here -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control ps-1" placeholder="Write your first name..." name="f_name">
+                        <!-- if email incorrect then show here -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control ps-1" placeholder="Write your last name..." name="l_name">
+                        <!-- if email incorrect then show here -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control ps-1" placeholder="Write your email..." name="email">
+                        <!-- if email incorrect then show here -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control ps-1" placeholder="Write your phone number..." name="phone">
+                        <!-- if email incorrect then show here -->
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control ps-1" placeholder="Write your password..." name="password">
+                        <!-- if password is incorrect then show here -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control ps-1" placeholder="Write your confirm password..." name="c_password">
+                        <!-- if password is incorrect then show here -->
+                    </div>
                 </div>
 
 
@@ -111,12 +137,13 @@
 
                 <!-- Submit button -->
                 <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                    class="btn btn-primary btn-block mb-4">Sign
-                    in</button>
+                    class="btn btn-primary btn-block mb-4">
+                    Register
+                </button>
 
                 <!-- Register buttons -->
                 <div class="text-center">
-                    <p>Not a member? <a href="signup">Register</a></p>
+                    <p>If have account, <a href="{% url 'login_form' %}">Signin</a></p>
 
                 </div>
             </form>

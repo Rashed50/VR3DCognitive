@@ -1,12 +1,9 @@
+import json, random, time
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
-import json, random, time
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from .models import VRUser,VRModel
-#from DataSource.mqttt import mqttt as mqtt_client2
-# mqtt file import
-from VR3DCognitive.mqtt import client as mqtt_client
 from django.views import View, generic
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib import messages
@@ -14,6 +11,9 @@ from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 
+#from DataSource.mqttt import mqttt as mqtt_client2
+# mqtt file import
+from VR3DCognitive.mqtt import client as mqtt_client
 
 
 User = get_user_model()
@@ -69,8 +69,11 @@ def createNewMember(request):
 
 
 
-# def login(request):
-#     return render(request, 'auth/login.html')
+class SignupView(View):
+    template_name = "auth/signup.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 
 class LoginView(View):
     template_name = "auth/login.html"
