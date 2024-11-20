@@ -119,28 +119,28 @@ class VRModelListView(LoginRequiredMixin, generic.ListView):
 
 def sendMessage(request):
 
-    x =  '{ "topic":"django/mqtt", "msg":"================ This is test message ======================="}'
-    request_data =  json.loads(x)
-    rc, mid = mqtt_client.publish(request_data['topic'], request_data['msg'])
-    print('=========================== Message Sent =======================================');
     session_id =  random.randrange(1111,9999)
     frame_number = random.randrange(99999,999999)
     timestamp = time.time()
+       
+    x = '{ "topic":"vr3d", "msg":"================ This is test message ======================="}'
+       
+    request_data =  json.loads(x)
+    rc, mid = mqtt_client.publish(request_data['topic'], request_data['msg'])
+    print('=========================== Message Sent =======================================')
+
 
     sensor_data = {
-        "HeadUserPresence": "False",
-        "HeadIsTracked": "False",
-        "HeadTrackingState": "0",
+        "HeadUserPresence": False,
+        "HeadIsTracked": False,
+        "HeadTrackingState": 0,
         "HeadDevicePosition": "(0.00, 0.00, 0.00)"
     }
-
     # convert into JSON:
-    sensor_data = json.dumps(x)
-
+    sensor_data = json.dumps(sensor_data)
     data = VRModel(sessionID= session_id,frame_number=frame_number,timestamp= timestamp,sensor_data=sensor_data)
     data.save() 
-
-    return JsonResponse({'code': rc,'message':'Successfully send'})
+    return JsonResponse({'code': rc,'message':'Successfully send and save in database'})
 
 
 
