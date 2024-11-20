@@ -1,0 +1,62 @@
+{% extends 'admin_dashboard/layouts/master.html' %}
+{% load static %}
+{% block title %}VR List{% endblock title %}
+
+{% block styles %}{% endblock styles %}
+
+
+
+
+{% block content %}
+<div class="page-inner">
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+        <div>
+            <!-- <h3 class="fw-bold mb-3">VR List</h3> -->
+            <!-- <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6> -->
+        </div>
+        <!-- <div class="ms-md-auto py-2 py-md-0">
+            <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+            <a href="#" class="btn btn-primary btn-round">Add Customer</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">VR Data List</h4>
+        
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-head-bg-primary table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Frame Number</th>
+                                    <th>Timestamp</th>
+                                    <th>Sensor Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for model in vr_models %}
+                                <tr>
+                                    <td>{{ model.sessionID }}</td>
+                                    <td>{{ model.frame_number }}</td>
+                                    <td>{{ model.timestamp }}</td>
+                                    <td>{{ model.sensor_data }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+{% block js %}{% endblock js %}

@@ -29,16 +29,16 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
 
-                <li class="nav-item active">
-                    <a href="">
+                <li class="nav-item {% if active == 'admin_home' %} active {% endif %}">
+                    <a href="{% url 'admin_dashboard' %}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="">
-                        <i class="fa-solid fa-bars"></i>
+                <li class="nav-item {% if active == 'vr_list' %} active {% endif %}">
+                    <a href="{% url 'admin_vr_model_list' %}">
+                        <i class="fa-solid fa-database"></i>
                         <p>VR3D List</p>
                     </a>
                 </li>

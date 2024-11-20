@@ -7,7 +7,6 @@ urlpatterns = [
     path('send-message',views.sendMessage,name="send_message"),
     path('api/',views.sendMessage,name="send_message"),
 
-    path('vr-list/', views.VRModelListView.as_view(), name='vr_model_list'),
 
 
     ## Auth Path
@@ -16,8 +15,9 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
 
     ## Admin Dashboard Path
-    path('admin-dashboard/', views.AdminHomeView.as_view(), name='admin_dashboard'),
+    path('admin/dashboard/', views.AdminHomeView.as_view(), name='admin_dashboard'),
+    path('admin/vr-list/', views.VRModelListView.as_view(), name='admin_vr_model_list'),
 
     ## API's URL
-    path('api/countries/', views.CountryListAPIView.as_view(), name='country-list'),
+    path('api/countries/', views.CountryListAPIView.as_view(), name='country_list'),
 ]

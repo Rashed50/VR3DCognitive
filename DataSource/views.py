@@ -203,21 +203,25 @@ class AdminHomeView(LoginRequiredMixin, generic.TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['active']          = 'admin_home'
         context['total_users']     = User.objects.all().count()
         context['total_countries'] = Country.objects.all().count()
         context['total_models']    = VRModel.objects.all().count()
         return context
 
 
+
+
 class VRModelListView(LoginRequiredMixin, generic.ListView):
     model = VRModel
-    template_name = 'vr3d/vr_model_list.html'  
+    template_name = 'admin_dashboard/vr3d/vr_model_list.html'  
     context_object_name = 'vr_models'    
     paginate_by = 10  
     login_url = reverse_lazy('login_form')
     
     def get_context_data(self, **kwargs):
         context = super(VRModelListView, self).get_context_data(**kwargs)
+        context['active']       = 'vr_list'
         context['total_models'] = VRModel.objects.all().count()
         return context
     
