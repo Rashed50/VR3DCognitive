@@ -16,14 +16,27 @@ from django.urls import reverse, reverse_lazy
 User = get_user_model()
 
 
-def index(request):
+# def index(request):
         
-   # template = loader.get_template('index.html')
-   # return HttpResponse("hello");
-   # return HttpResponse(template.render())
-   my_name = "Hasan"
-   info = {'name':my_name}
-   return render(request,'layouts/master.html',info)
+#    # template = loader.get_template('index.html')
+#    # return HttpResponse("hello");
+#    # return HttpResponse(template.render())
+#    my_name = "Hasan"
+#    info = {'name':my_name}
+#    return render(request,'layouts/master.html',info)
+
+
+class Home(generic.TemplateView):
+    template_name = 'layouts/master.html'
+
+    def get_context_data(self, **kwargs):   
+        context = super().get_context_data(**kwargs)
+        
+        context['banner_show'] = True
+        context['info'] = {
+            'name': 'Your Company Name'
+        }
+        return context
 
 
 
