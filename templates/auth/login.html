@@ -87,7 +87,11 @@
                 {% if messages %}
                 <div>
                     {% for message in messages %}
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert 
+                        {% if message.tags == 'success' %}alert-success{% endif %}
+                        {% if message.tags == 'error' %}alert-danger{% endif %}
+                        {% if message.tags == 'warning' %}alert-warning{% endif %}
+                        {% if message.tags == 'info' %}alert-info{% endif %}" role="alert">
                         {{ message }}
                     </div>
                     {% endfor %}

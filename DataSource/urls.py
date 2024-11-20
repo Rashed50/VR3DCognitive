@@ -15,6 +15,9 @@ urlpatterns = [
     path('signup/', views.SignupView.as_view(), name="signup_form"),
     path('logout/', views.LogoutView.as_view(), name='logout'),
 
+    ## Admin Dashboard Path
+    path('admin-dashboard/', views.AdminHomeView.as_view(), name='admin_dashboard'),
+
     ## API's URL
     path('api/countries/', views.CountryListAPIView.as_view(), name='country-list'),
 ]

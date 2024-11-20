@@ -138,7 +138,7 @@ class LoginView(View):
             
             if auth_user is not None:
                 login(request, auth_user) 
-                return redirect('vr_model_list')  
+                return redirect('admin_dashboard')  
             else:
                 messages.error(request, "Incorrect password!")
         else:
@@ -158,22 +158,6 @@ class LogoutView(LoginRequiredMixin, View):
             return redirect('login_form')
         return redirect('index')
     
-
-
-
-class VRModelListView(LoginRequiredMixin, generic.ListView):
-    model = VRModel
-    template_name = 'vr3d/vr_model_list.html'  
-    context_object_name = 'vr_models'    
-    paginate_by = 10  
-    login_url = reverse_lazy('login_form')
-    
-    def get_context_data(self, **kwargs):
-        context = super(VRModelListView, self).get_context_data(**kwargs)
-        context['total_models'] = VRModel.objects.all().count()
-        return context
-    
-
 
 
 def sendMessage(request):
@@ -211,6 +195,38 @@ def sendMessage(request):
 
 
 
+
+## Admin Views -----------------------------
+class AdminHomeView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'admin_dashboard/layouts/index.html'
+    login_url = reverse_lazy('login_form')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_users']     = User.objects.all().count()
+        context['total_countries'] = Country.objects.all().count()
+        context['total_models']    = VRModel.objects.all().count()
+        return context
+
+
+class VRModelListView(LoginRequiredMixin, generic.ListView):
+    model = VRModel
+    template_name = 'vr3d/vr_model_list.html'  
+    context_object_name = 'vr_models'    
+    paginate_by = 10  
+    login_url = reverse_lazy('login_form')
+    
+    def get_context_data(self, **kwargs):
+        context = super(VRModelListView, self).get_context_data(**kwargs)
+        context['total_models'] = VRModel.objects.all().count()
+        return context
+    
+
+
+
+
+
+## API's Views -----------------------------
 class CountryListAPIView(APIView):
     def get(self, request, *args, **kwargs):
         countries  = Country.objects.all()  
