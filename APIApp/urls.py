@@ -15,5 +15,7 @@ urlpatterns = [
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     #path('send-message/',views.sendMessage,name="send_message"),
     path('get-users/',views.getUsers.as_view()),
+    path('get-vr-data',views.getVRModelData),
+    path('store-vr-data',views.postVRModelData),
 
 ]
