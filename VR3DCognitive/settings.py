@@ -86,7 +86,8 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg',
         "ENGINE"   : "django.db.backends.postgresql",
-        'NAME'     : 'vr3dcognitive',
+        # 'NAME'     : 'vr3dcognitive',
+        'NAME'     : 'vr3dcognitive1',  ## My Database (Rakib)
         'USER'     : 'postgres',
         'PASSWORD' : '123456',
         'HOST'     :'localhost',

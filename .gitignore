@@ -18,6 +18,9 @@ ENV/
 .venv/
 vrenv/
 
+
+.env
+
 # PyCharm
 .idea/
 

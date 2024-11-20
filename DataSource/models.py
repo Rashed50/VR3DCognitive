@@ -49,7 +49,7 @@ class VRUser(TimestampedModel):
     zip        = models.CharField(max_length=10,  null=True, blank=True)
 
     def __str__(self):
-        return f"Name: {self.user_id.first_name}, ContactNo: {self.contact_no}"
+        return self.contact_no if self.contact_no else "No contact number"
 
     class Meta:
         db_table = 'vrusers'

@@ -48,61 +48,76 @@ class SignupView(View):
     template_name = "auth/signup.html"
 
     def get(self, request, *args, **kwargs):
-        # countries = Country.objects.values('id', 'name')
-
-        # print("------------------")
-        # print("countries =", countries)
-        # print("------------------")
-
-        # data = {
-        #     'countries': list(countries)
-        # }
         return render(request, self.template_name)
     
     def post(self, request, *args, **kwargs):
-
         first_name = request.POST.get('f_name')
         last_name  = request.POST.get('l_name')
         email      = request.POST.get('email')
         phone      = request.POST.get('phone')
-        country    = 1 # request.POST.get('country')
+        country    = request.POST.get('country')
         city       = request.POST.get('city')
         address    = request.POST.get('address')
         password   = request.POST.get('password')
         confirm_password = request.POST.get('c_password')
 
-        print("---------------------")
-        print("Data =", request.POST)
-        print("---------------------")
         
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
-            return render(request, self.template_name)
+            return render(request, self.template_name, {
+                'first_name': first_name,
+                'last_name' : last_name,
+                'email'     : email,
+                'phone'     : phone,
+                'country'   : country,
+                'city'      : city,
+                'address'   : address
+            })
 
         try:
+            username = email.split('@')[0]
+
+            if User.objects.filter(username=username).exists():
+                username = f"{username}{User.objects.filter(username__startswith=username).count() + 1}"
+
             user = User.objects.create(
+                username   = username,
                 first_name = first_name,
                 last_name  = last_name,
                 email      = email,
-                password   = make_password(password)  
+                password   = make_password(password) 
             )
 
-            # Create a VRUser (profile) instance
-            vr_user = VRUser.objects.create(
-                user_id    = user,
-                contact_no = phone,
-                country_id = country,  
-                city       = city,
-                address    = address
-            )
+            try:
+                country_obj = Country.objects.get(id=int(country))
+            except Country.DoesNotExist:
+                messages.error(request, "Invalid country selected.")
+                return render(request, self.template_name)
 
-            messages.success(request, "Account created successfully! Please log in.")
+            existing_vr_user = VRUser.objects.filter(user_id=user).first()
+
+            if existing_vr_user:
+                existing_vr_user.contact_no = phone
+                existing_vr_user.country_id = country_obj
+                existing_vr_user.city       = city
+                existing_vr_user.address    = address
+                existing_vr_user.save()
+                messages.success(request, "Your account has been created successfully! Please log in.")
+            else:
+                vr_user = VRUser.objects.create(
+                    user_id    = user,
+                    contact_no = phone,
+                    country_id = country_obj,
+                    city       = city,
+                    address    = address
+                )
+                messages.success(request, "Account created successfully! Please log in.")
+
             return redirect('login_form')  
+
         except Exception as e:
             messages.error(request, f"Error: {e}")
             return render(request, self.template_name)
-        
-
 
 
 
@@ -192,8 +207,12 @@ def sendMessage(request):
     """
     API view to retrieve a list of all countries.
     """
+
+
+
+
 class CountryListAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        countries = Country.objects.all()  
+        countries  = Country.objects.all()  
         serializer = CountrySerializer(countries, many=True)  
         return Response(serializer.data, status=status.HTTP_200_OK)

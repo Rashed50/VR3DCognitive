@@ -130,8 +130,10 @@
 
                         <div class="col-md-6 mb-1">
                             <label class="form-label">Contact Number</label>
-                            <input type="text" class="form-control ps-1" placeholder="Contact Number" name="phone">
+                            <input type="text" class="form-control ps-1" placeholder="Contact Number" name="phone" minlength="11" maxlength="13"
+                                pattern="^\d{11,13}$" title="Phone number must be between 11 and 13 digits" required>
                         </div>
+
 
                         <div class="col-md-6 mb-1">
                             <label class="form-label">Country Name</label>
