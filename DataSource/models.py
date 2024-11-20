@@ -28,7 +28,7 @@ class Country(TimestampedModel):
     short_name = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
-        self.name
+        return self.name
     
     class Meta:
         verbose_name_plural = 'countries'
