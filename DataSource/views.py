@@ -37,7 +37,7 @@ class Home(generic.TemplateView):
         
         context['banner_show'] = True
         context['info'] = {
-            'name': 'Your Company Name'
+            'name': ''
         }
         return context
 
