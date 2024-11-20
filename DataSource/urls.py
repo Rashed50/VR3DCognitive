@@ -4,9 +4,6 @@ from . import views
 
 urlpatterns = [
     path('',views.Home.as_view(),name='index'),
-    path('signup',views.signup,name='signup_form'),
-    path('signup_request',views.createNewMember,name='create_new_user'),
-    # path('login/',views.login,name='login_form'),
     path('send-message',views.sendMessage,name="send_message"),
     path('api/',views.sendMessage,name="send_message"),
 
@@ -17,4 +14,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name="login_form"),
     path('signup/', views.SignupView.as_view(), name="signup_form"),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+
+    ## API's URL
+    path('api/countries/', views.CountryListAPIView.as_view(), name='country-list'),
 ]

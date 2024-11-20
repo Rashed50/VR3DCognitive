@@ -3,7 +3,6 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
-from .models import VRUser,VRModel
 from django.views import View, generic
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib import messages
@@ -12,22 +11,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.hashers import make_password
 from django.urls import reverse, reverse_lazy
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 #from DataSource.mqttt import mqttt as mqtt_client2
 # mqtt file import
-from VR3DCognitive.mqtt import client as mqtt_client
+from VR3DCognitive.mqtt import client as mqtt_client    
 
+## Custom Import
+from DataSource.models import Country, VRUser, VRModel
+from DataSource.serializers import CountrySerializer
 
 User = get_user_model()
 
 
-# def index(request):
-        
-#    # template = loader.get_template('index.html')
-#    # return HttpResponse("hello");
-#    # return HttpResponse(template.render())
-#    my_name = "Hasan"
-#    info = {'name':my_name}
-#    return render(request,'layouts/master.html',info)
+
 
 
 class Home(generic.TemplateView):
@@ -44,36 +43,20 @@ class Home(generic.TemplateView):
 
 
 
-def signup(request):
-    template = loader.get_template('signup_form.html')
-    return HttpResponse(template.render())
-
-
-
-@csrf_exempt
-def createNewMember(request):
-    if(request.method == 'POST'):
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        contact_no = request.POST.get('contact_no')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        country_id = request.POST.get('country_id')
-        state_id = request.POST.get('state_id')
-        city = request.POST.get('city')
-        address = request.POST.get('address')
-        address2 = request.POST.get('address2')
-        zip = request.POST.get('zip')
-        user = VRUser(first_name=first_name,last_name=last_name,contact_no=contact_no,email=email,password=password,country_id=1,state_id=1,city="",address=address,address2="",zip=zip)
-        user.save()
-        return HttpResponse("Successfully Saved")
-
-
 
 class SignupView(View):
     template_name = "auth/signup.html"
 
     def get(self, request, *args, **kwargs):
+        # countries = Country.objects.values('id', 'name')
+
+        # print("------------------")
+        # print("countries =", countries)
+        # print("------------------")
+
+        # data = {
+        #     'countries': list(countries)
+        # }
         return render(request, self.template_name)
     
     def post(self, request, *args, **kwargs):
@@ -150,6 +133,7 @@ class LoginView(View):
 
 
 
+
 class LogoutView(LoginRequiredMixin, View):
     login_url = reverse_lazy('login_form') 
 
@@ -204,3 +188,12 @@ def sendMessage(request):
 
 
 
+## API's
+    """
+    API view to retrieve a list of all countries.
+    """
+class CountryListAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        countries = Country.objects.all()  
+        serializer = CountrySerializer(countries, many=True)  
+        return Response(serializer.data, status=status.HTTP_200_OK)

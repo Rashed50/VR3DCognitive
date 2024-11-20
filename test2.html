@@ -133,12 +133,18 @@
                             <input type="text" class="form-control ps-1" placeholder="Contact Number" name="phone">
                         </div>
 
+                        <!-- <div class="col-md-6 mb-1">
+                            <label class="form-label">Country Name</label>
+                            <select id="country" class="form-control ps-1" name="country">
+                            </select>
+                        </div> -->
+
                         <div class="col-md-6 mb-1">
                             <label class="form-label">Country Name</label>
                             <select id="country" class="form-control ps-1" name="country" v-if="countries.length"
                                 v-model="selectedCountry">
                                 <option v-for="country in countries" :value="country.id" :key="country.id">
-                                    [[ country.name ]]
+                                    {{ country.name }}
                                 </option>
                             </select>
                         </div>
@@ -204,7 +210,6 @@
     <!-- Vue App Script -->
     <script>
         const app = Vue.createApp({
-            delimiters: ['[[', ']]'],
             data() {
                 return {
                     countries: [],

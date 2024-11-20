@@ -133,12 +133,17 @@
                             <input type="text" class="form-control ps-1" placeholder="Contact Number" name="phone">
                         </div>
 
+                        <!-- <div class="col-md-6 mb-1">
+                            <label class="form-label">Country Name</label>
+                            <select id="country" class="form-control ps-1" name="country">
+                            </select>
+                        </div> -->
+
                         <div class="col-md-6 mb-1">
                             <label class="form-label">Country Name</label>
-                            <select id="country" class="form-control ps-1" name="country" v-if="countries.length"
-                                v-model="selectedCountry">
+                            <select id="country" class="form-control ps-1" name="country" v-model="selectedCountry">
                                 <option v-for="country in countries" :value="country.id" :key="country.id">
-                                    [[ country.name ]]
+                                    {{ country.name }}
                                 </option>
                             </select>
                         </div>
@@ -204,43 +209,49 @@
     <!-- Vue App Script -->
     <script>
         const app = Vue.createApp({
-            delimiters: ['[[', ']]'],
             data() {
                 return {
-                    countries: [],
-                    selectedCountry: ''
-                }
+                    countries: [
+                        { id: 'US', text: 'United States' },
+                        { id: 'IN', text: 'India' },
+                        { id: 'GB', text: 'United Kingdom' },
+                        { id: 'CA', text: 'Canada' },
+                        { id: 'AU', text: 'Australia' },
+                        { id: 'DE', text: 'Germany' },
+                        { id: 'FR', text: 'France' },
+                        { id: 'ES', text: 'Spain' },
+                        { id: 'IT', text: 'Italy' },
+                        { id: 'PL', text: 'Poland' },
+                        { id: 'NL', text: 'Netherlands' },
+                        { id: 'BE', text: 'Belgium' },
+                        { id: 'SE', text: 'Sweden' },
+                        { id: 'NO', text: 'Norway' },
+                        { id: 'CH', text: 'Switzerland' },
+                        { id: 'AT', text: 'Austria' },
+                        { id: 'DK', text: 'Denmark' },
+                        { id: 'FI', text: 'Finland' },
+                        { id: 'GR', text: 'Greece' }
+                    ]
+                };
             },
             mounted() {
-                this.fetchCountries();
+                this.initSelect2();
             },
             methods: {
-                async fetchCountries() {
-                    try {
-                        const response = await fetch('/api/countries/');
-                        const data = await response.json();
-
-                        console.log("Data =", data);
-
-                        this.countries = data.map(country => ({
-                            id: country.id,
-                            name: country.name
-                        }));
-
-                        this.$nextTick(() => {
-                            this.initSelect2();
-                        });
-
-                    } catch (error) {
-                        console.error('Error fetching countries:', error);
-                    }
-                },
-
                 initSelect2() {
-                    $('#country').select2().on('change', function () {
+                    const vm = this;
+
+                    $('#country').select2({
+                        data: vm.countries
+                    }).on('change', function () {
                         const selectedCountry = $(this).val();
                         console.log('Selected country:', selectedCountry);
                     });
+                }
+            },
+            watch: {
+                countries() {
+                    $('#country').trigger('change');
                 }
             }
         });
