@@ -1,19 +1,20 @@
+import json, random, time
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
-import json, random, time
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from .models import VRUser,VRModel
-#from DataSource.mqttt import mqttt as mqtt_client2
-# mqtt file import
-from VR3DCognitive.mqtt import client as mqtt_client
 from django.views import View, generic
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.hashers import make_password
 from django.urls import reverse, reverse_lazy
 
+#from DataSource.mqttt import mqttt as mqtt_client2
+# mqtt file import
+from VR3DCognitive.mqtt import client as mqtt_client
 
 
 User = get_user_model()
@@ -69,8 +70,58 @@ def createNewMember(request):
 
 
 
-# def login(request):
-#     return render(request, 'auth/login.html')
+class SignupView(View):
+    template_name = "auth/signup.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+    
+    def post(self, request, *args, **kwargs):
+
+        first_name = request.POST.get('f_name')
+        last_name  = request.POST.get('l_name')
+        email      = request.POST.get('email')
+        phone      = request.POST.get('phone')
+        country    = request.POST.get('country')
+        city       = request.POST.get('city')
+        address    = request.POST.get('address')
+        password   = request.POST.get('password')
+        confirm_password = request.POST.get('c_password')
+
+        print("---------------------")
+        print("Data =", request.POST)
+        print("---------------------")
+        
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return render(request, self.template_name)
+
+        try:
+            user = User.objects.create(
+                first_name = first_name,
+                last_name  = last_name,
+                email      = email,
+                password   = make_password(password)  
+            )
+
+            # Create a VRUser (profile) instance
+            vr_user = VRUser.objects.create(
+                user_id    = user,
+                contact_no = phone,
+                country_id = country,  
+                city       = city,
+                address    = address
+            )
+
+            messages.success(request, "Account created successfully! Please log in.")
+            return redirect('login_form')  
+        except Exception as e:
+            messages.error(request, f"Error: {e}")
+            return render(request, self.template_name)
+        
+
+
+
 
 class LoginView(View):
     template_name = "auth/login.html"

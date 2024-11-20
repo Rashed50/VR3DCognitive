@@ -12,8 +12,7 @@ def create_vruser(sender, instance, created, **kwargs):
 
         VRUser.objects.create(
             user_id    = instance,  
-            contact_no = None,   
-            country_id = 1,      
+            contact_no = None,        
             state_id   = 1,        
             city       = None,       
             address    = None,      

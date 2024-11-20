@@ -22,12 +22,26 @@ class VRModel(TimestampedModel):
 
 
 
+
+class Country(TimestampedModel):
+    name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=10, null=True, blank=True)
+
+    def __str__(self):
+        self.name
+    
+    class Meta:
+        verbose_name_plural = 'countries'
+        db_table = 'country'
+        ordering = ['name']
+
+
 class VRUser(TimestampedModel):
     vr_user_id = models.AutoField(primary_key=True)
     user_id    = models.OneToOneField(User, on_delete=models.CASCADE)
 
     contact_no = models.CharField(max_length=13, null=True, blank=True)    
-    country_id = models.SmallIntegerField(default=1)
+    country_id = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True)
     state_id   = models.SmallIntegerField(default=1)
     city       = models.CharField(max_length=100, null=True, blank=True)
     address    = models.TextField(max_length=300, null=True, blank=True)
