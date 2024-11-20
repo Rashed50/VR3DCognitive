@@ -199,7 +199,7 @@ def sendMessage(request):
 
 ## Admin Views -----------------------------
 class AdminHomeView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'admin_dashboard/layouts/index.html'
+    template_name = 'admin_dashboard/home.html'
     login_url = reverse_lazy('login_form')
     
     def get_context_data(self, **kwargs):
