@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'DataSource',
     'VR3DCognitive',
+    'APIApp',
 
 ]
 
@@ -164,8 +165,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#MQTT_SERVER = 'broker.emqx.io'
-MQTT_SERVER = 'mqtt.eclipseprojects.io'
+MQTT_SERVER = 'broker.emqx.io'
+#MQTT_SERVER = "127.0.0.1" #'mqtt.eclipseprojects.io'
 MQTT_PORT = 1883
 MQTT_KEEPALIVE = 60
 MQTT_USER = ''

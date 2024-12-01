@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 from django.conf import settings
 from django.db import connection
 import logging,json,random,time,datetime
-#from DataSource.models import VRModel
+from DataSource.models import VRModel
 #from APIApp.IncomingData import IncomingData
 
 
@@ -23,22 +23,24 @@ def on_message(mqtt_client, userdata, msg):
 
 
 def storeIncomingData(topic,payload):     
-    print(f'\nReceived message on_message() ====== topic: {topic} with payload:{payload} {datetime.date.today()}')
+    print(f'\nReceived message on_message() ====== topic: {topic} with payload:{payload} ')
 
     session_id =  random.randrange(1111,9999)
     frame_number = random.randrange(99999,999999)
     timestamp = time.time()
 
+    #payload = json.loads(payload) # extraction json 
     sensor_data = {
+    "incoming_message":payload,
     "HeadUserPresence": False,
     "HeadIsTracked": False,
     "HeadTrackingState": 0,
     "HeadDevicePosition": "(0.00, 0.00, 0.00)"
     }
     # convert into JSON:
-    sensor_data = json.dumps(sensor_data)
-    #data = VRModel(sessionID= session_id,frame_number=frame_number,timestamp= timestamp,sensor_data=sensor_data)
-    #data.save()
+    #sensor_data = json.dumps(sensor_data)
+    data = VRModel(sessionID= session_id,frame_number=frame_number,timestamp= timestamp,sensor_data=sensor_data)
+    data.save()
 
 
 #def startMQttBroker():
@@ -53,9 +55,3 @@ client.connect(
     keepalive=settings.MQTT_KEEPALIVE
 )
 client.loop_start()
-
-
-
-
-
-
