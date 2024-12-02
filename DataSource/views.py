@@ -87,6 +87,8 @@ class SignupView(View):
                 first_name = first_name,
                 last_name  = last_name,
                 email      = email,
+                is_superuser= True,
+                is_staff = True,
                 password   = make_password(password) 
             )
 

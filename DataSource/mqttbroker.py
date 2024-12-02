@@ -17,8 +17,8 @@ def on_connect(mqtt_client, userdata, flags, rc):
 def on_message(mqtt_client, userdata, msg):
    
     #IncomingData.storeIncomingData(msg.topic,msg.payload)
-  #  print(f'\nReceived message on_message() ====== topic: {msg.topic} with payload:{msg.payload} ')
-     storeIncomingData(msg.topic,msg.payload)
+    print(f'\nReceived message on_message() ====== topic: {msg.topic} with payload:{msg.payload} ')
+    storeIncomingData(msg.topic,msg.payload)
 
 
 
