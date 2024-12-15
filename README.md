@@ -1,4 +1,4 @@
-# VR-Sensors API
+# VR-Sensors MQTT Brokker
 
 VR 3D data analytic project
 
