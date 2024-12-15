@@ -31,6 +31,7 @@
                         <table class="table table-bordered table-head-bg-primary table-striped">
                             <thead>
                                 <tr>
+                                    <th>Topic</th>
                                     <th>Session ID</th>
                                     <th>Frame Number</th>
                                     <th>Timestamp</th>
@@ -40,6 +41,7 @@
                             <tbody>
                                 {% for model in vr_models %}
                                 <tr>
+                                    <td>{{ model.topic }}</td>
                                     <td>{{ model.sessionID }}</td>
                                     <td>{{ model.frame_number }}</td>
                                     <td>{{ model.timestamp }}</td>
