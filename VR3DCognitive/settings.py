@@ -90,7 +90,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.postgresql_psycopg',
         "ENGINE"   : "django.db.backends.postgresql",
         # 'NAME'     : 'vr3dcognitive',
-        'NAME'     : 'vr3dcognitive',  ## My Database (Rakib)
+        'NAME'     : 'vrsensors_db',  ## My Database (Rakib)
         'USER'     : 'postgres',
         'PASSWORD' : '123456',
         'HOST'     :'localhost',
@@ -167,12 +167,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+MQTT_SERVER = 'mgbckr.net'
 #MQTT_SERVER = 'broker.emqx.io'
-MQTT_SERVER = "127.0.0.1" #'mqtt.eclipseprojects.io'
-MQTT_PORT = 8083
+#MQTT_SERVER = "172.28.96.1" #'mqtt.eclipseprojects.io'
+MQTT_PORT = 8084
 MQTT_KEEPALIVE = 60
-MQTT_USER = ''
-MQTT_PASSWORD = ''
+MQTT_USER = 'vrsensors'
+MQTT_PASSWORD = '*vr!sensors2024'
 
 
 REST_FRAMEWORK = {    

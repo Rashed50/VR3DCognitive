@@ -19,6 +19,8 @@ from rest_framework import status
 # mqtt file import
 #from VR3DCognitive.mqtt import client as mqtt_client    
 from DataSource.mqttbroker import client as mqtt_client
+# from DataSource.ssl_mqtt import client as mqtt_ssl_client
+
 
 ## Custom Import
 from DataSource.models import Country, VRUser, VRModel
@@ -170,16 +172,16 @@ def sendMessage(request):
     frame_number = random.randrange(99999,999999)
     timestamp = time.time()
        
-    x = '{ "topic":"vr_sensor3", "msg":"This is test message from browser"} '
-       
-    request_data =  json.loads(x)
-   # request_data = json.dumps(x)
-    rc, mid = mqtt_client.publish(request_data['topic'], request_data['msg'])
+    topic = "vrsensors"
+    payload = '{ "msg":"Message Receiving from web Application", "session_id":"654654132","frame_number":"741852963","timestamp":"898986565232" }  '
+
+    #request_data =  json.loads(payload)
+    rc, mid = mqtt_client.publish(topic, payload)
     print('=========================== Message Sent =======================================')
 
 
     sensor_data = {
-         
+
         "HeadUserPresence": False,
         "HeadIsTracked": False,
         "HeadTrackingState": 0,
@@ -187,9 +189,7 @@ def sendMessage(request):
     }
     # convert into JSON:
     sensor_data = json.dumps(sensor_data)
-    data = VRModel(sessionID= session_id,frame_number=frame_number,timestamp= timestamp,sensor_data=sensor_data)
-   # data.save() 
-    return JsonResponse({'code': rc,'message':'Successfully send and save in database'})
+    return JsonResponse({'status code': rc,'message': 'Successfully send and save in database','message_id':mid })
 
 
 
@@ -219,7 +219,7 @@ class AdminHomeView(LoginRequiredMixin, generic.TemplateView):
 
 
 class VRModelListView(LoginRequiredMixin, generic.ListView):
-    model = VRModel
+    model = VRModel  
     template_name = 'admin_dashboard/vr3d/vr_model_list.html'  
     context_object_name = 'vr_models'    
     paginate_by = 10  

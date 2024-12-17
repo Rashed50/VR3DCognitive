@@ -56,10 +56,12 @@
                             </div>
                         </div>
                         <div class="col col-stats ms-3 ms-sm-0">
-                            <div class="numbers">
-                                <p class="card-category">VRD Sesson</p>
-                                <h4 class="card-title">{{total_models}}</h4>
-                            </div>
+                            <a href="{% url 'admin_vr_model_list' %}">
+                                <div class="numbers">
+                                    <p class="card-category">VRD Sesson</p>
+                                    <h4 class="card-title">{{total_models}}</h4>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
