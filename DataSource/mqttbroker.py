@@ -49,18 +49,18 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message 
 #client.subscribe("vrsensor",qos=2)
-client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
-#client.username_pw_set('','')
+# client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+client.username_pw_set('','')
 #client.tls_insecure_set(False)
 #client.connect_async(host=settings.MQTT_SERVER)
 #client.tls_set()
-client.tls_set(certfile=None,
-               keyfile=None,
-               cert_reqs=ssl.CERT_REQUIRED)
+# client.tls_set(certfile=None,
+#                keyfile=None,
+#                cert_reqs=ssl.CERT_REQUIRED)
 
 connection_status = client.connect(
     host=settings.MQTT_SERVER,
-    port=settings.MQTT_PORT,
+    port=settings.MQTT_PORT_1883,
     keepalive=settings.MQTT_KEEPALIVE,
    # clean_start=mqtt.MQTT_CLEAN_START_FIRST_ONLY,
 )
