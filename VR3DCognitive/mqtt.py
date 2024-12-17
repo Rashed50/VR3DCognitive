@@ -2,8 +2,6 @@ import paho.mqtt.client as mqtt
 from django.conf import settings
 from django.db import connection
 import logging,json,random,time,datetime
-#from DataSource.models import VRModel
-#from APIApp.IncomingData import IncomingData
 
 
 def on_connect(mqtt_client, userdata, flags, rc):

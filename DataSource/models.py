@@ -19,6 +19,10 @@ class TimestampedModel(models.Model):
 
 class VRModel(TimestampedModel):
 
+    def __init__(self):
+        super().__init__()
+        return self
+
     def __init__(self, sessionId,frameNumber,topic,message):
         super().__init__()
         self.sessionID    = sessionId

@@ -165,10 +165,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#MQTT_SERVER = 'mgbckr.net'
-MQTT_SERVER = 'broker.emqx.io'
+MQTT_SERVER = 'mgbckr.net'
+#MQTT_SERVER = 'broker.emqx.io'
 #MQTT_SERVER = "172.28.96.1" #'mqtt.eclipseprojects.io'
-MQTT_PORT = 1883
+MQTT_PORT = 8084
 MQTT_KEEPALIVE = 60
 MQTT_USER = 'vrsensors'
 MQTT_PASSWORD = '*vr!sensors2024'
