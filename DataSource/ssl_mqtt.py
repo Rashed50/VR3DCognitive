@@ -3,18 +3,19 @@ import paho.mqtt.client as mqtt
 import ssl, time, inspect, os
 from django.conf import settings
 
+
 # Make sure we're running from project-root regardless where this was invoked from
 scriptdir = os.path.dirname( os.path.abspath(inspect.getfile(inspect.currentframe())) )
 os.chdir( scriptdir )
 os.chdir( '../../..' )
-print( 'WDIR: ' + os.getcwd() )
+print( 'WDIR: ' + os.path.abspath("vr.crt") )
 
 
 broker_address="mgbckr.net" # this must match the CNAME in your server-cert!
 topic="T/GettingStarted/pubsub"
 
-CA_CERT_PATH = "E:\My_Work\VR3DCognitive\DataSource\certificate.cer"  # Certificate Authority file
-CLIENT_CERT_PATH = "DataSource/certificate.cer"  # Optional, client certificate
+CA_CERT_PATH = "E:\My_Work\VR3DCognitive\DataSource\fullchain.pem"  # Certificate Authority file
+CLIENT_CERT_PATH = "E:\My_Work\VR3DCognitive\DataSource\vr.crt"    # Optional, client certificate
 CLIENT_KEY_PATH = "DataSource/privateKey.key"  # Optional, client key
 
 
@@ -31,13 +32,17 @@ client = mqtt.Client()
 
 print( "connecting to broker" )
 #client.tls_set("myssl.pem", "myssl.crt", "myssl.key", tls_version=ssl.PROTOCOL_TLSv1_2)
+sslSettings  = ssl.SSLContext()
+sslSettings.verify_mode  = ssl.CERT_REQUIRED
+sslSettings.load_verify_locations(cafile=CLIENT_CERT_PATH)
+#sslSettings.load_cert_chain(certfile=CLIENT_CERT_PATH)
 client.tls_set(
-    ca_certs=CA_CERT_PATH,              # CA certificate file
+    ca_certs= CLIENT_CERT_PATH,              # CA certificate file
     #certfile=CLIENT_CERT_PATH,         # Client certificate file (optional)
     #keyfile=CLIENT_KEY_PATH,           # Client private key file (optional)
-    tls_version=ssl.PROTOCOL_TLSv1_2   # TLS version
+    #tls_version=ssl.PROTOCOL_TLSv1_2   # TLS version
 )
-client.tls_insecure_set(True)
+#client.tls_insecure_set(True)
 client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
 client.connect( broker_address, 8084, 60 )
 

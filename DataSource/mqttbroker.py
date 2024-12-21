@@ -40,7 +40,8 @@ def storeIncomingData(topic,payload):
     }
     # convert into JSON:
     #sensor_data = json.dumps(sensor_data)
-    data =VRModel(sessionId=session_id,frameNumber=frame_number,topic=topic,message=msg) #  VRModel(sessionID= session_id,frame_number=frame_number,timestamp= timestamp,topic=topic,message= msg)
+    data = VRModel(sessionID= session_id,frameNumber=frame_number,timestamp= timestamp,topic=topic,sensorData= msg)
+    #data = VRModel.objects.create(sessionID=session_id,frameNumber=frame_number,topic=topic,message=msg) # ORM system 
     data.save()
 
 
@@ -49,7 +50,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message 
 #client.subscribe("vrsensor",qos=2)
-# client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+#client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
 client.username_pw_set('','')
 #client.tls_insecure_set(False)
 #client.connect_async(host=settings.MQTT_SERVER)
@@ -60,10 +61,11 @@ client.username_pw_set('','')
 
 connection_status = client.connect(
     host=settings.MQTT_SERVER,
-    port=settings.MQTT_PORT_1883,
+    port=settings.MQTT_PORT_8084,
     keepalive=settings.MQTT_KEEPALIVE,
    # clean_start=mqtt.MQTT_CLEAN_START_FIRST_ONLY,
 )
+
 print(f"connecting to MQTT broker- version {client.callback_api_version}------------------- user= {settings.MQTT_USER} status  {connection_status}")
 client.loop_start()
     
