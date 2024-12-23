@@ -19,7 +19,8 @@ from rest_framework import status
 # mqtt file import
 #from VR3DCognitive.mqtt import client as mqtt_client    
 from DataSource.mqttbroker import client as mqtt_client
-from DataSource.ssl_mqtt import client as mqtt_ssl_client
+# from DataSource.ssl_mqtt import client as mqtt_ssl_client
+from DataSource import ssl_mqtt
 
 
 ## Custom Import
