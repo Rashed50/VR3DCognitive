@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 client = mqtt.Client()
 client.tls_set(
-    certfile=r"D:\\Texon\\21-10-2024\\3d\\VR3DCognitive\\MqttData\\vr.crt",
+    certfile=r"E:\\My_Work\\VR3DCognitive\\MqttData\\vr.crt",
     # ca_certs=r"D:\\Texon\\21-10-2024\\3d\\VR3DCognitive\\MqttData\\fullchain.pem",
     # keyfile=r"D:\\Texon\\21-10-2024\\3d\\VR3DCognitive\\MqttData\\privateKey.key"
 )

@@ -168,7 +168,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MQTT_SERVER = 'mgbckr.net'
+MQTT_SERVER = 'wss://mgbckr.net'
 # MQTT_SERVER    = 'broker.emqx.io'
 # MQTT_SERVER    = "172.28.96.1" #'mqtt.eclipseprojects.io'
 MQTT_PORT_1883 = 1883    # default port
